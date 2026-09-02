@@ -13,41 +13,22 @@ print("Introduction:\n" \
 z = int(input("Enter a whole number:"))
 m = [1,4,6,8,9,23]
 m2 = m
+result = None
+seen = {}
 
-for i in range(0, len(m)):
-    i0 = m[0] + m2[(1+i) % len(m)]
-    i1 = m[1] + m2[(2+i) % len(m)]
-    i2 = m[2] + m2[(3+i) % len(m)]
-    i3 = m[3] + m2[(4+i) % len(m)]
-    i4 = m[4] + m2[(5+i) % len(m)]
-    i5 = m[5] + m2[(6+i) % len(m)]
+for index, num in enumerate(m):
+    subtraction = z - num
+    if subtraction in seen:
+        result = seen[subtraction], index
+        break 
+    seen[num] = index
 
-    if(z == i0 or z == i1 or z == i2 or z == i3 or z == i4 or z == i5):
-        print("A solution has been found!\n\n\n\n")
-        break
+if result :
+    i, j = result
+    print(f"m[{i}] + m[{j}] = {m[i]} + {m[j]} = {z}")
+else: 
+    print("No pair found")
 
-
-
-
-if(i0 == z):
-    print(f"Solution: {m[0]} + {m2[(0+i) % len(m)]}")
-    pass
-elif(i1 == z):
-    print(f"Solution: {m[1]} + {m2[(1+i) % len(m)]}")
-    pass
-elif(i2 == z):
-    print(f"Solution: {m[2]} + {m2[(2+i) % len(m)]}")
-    pass
-elif(i3 == z):
-    print(f"Solution: {m[3]} + {m2[(3+i) % len(m)]}")
-    pass
-elif(i4 == z):
-    print(f"Solution: {m[4]} + {m2[(4+i) % len(m)]}")
-    pass
-elif(i5 == z):
-    print(f"Solution: {m[5]} + {m2[(5+i) % len(m)]}")
-    pass
-   
 
     
 
