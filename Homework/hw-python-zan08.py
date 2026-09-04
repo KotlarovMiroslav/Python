@@ -24,25 +24,19 @@ for i in getNumbers(123):
     print(f"{i} and type: {type(i)}")
 
 #Зад. 8
-#MODES: 0 - NORMAL SUM / !0 - UNIQUE SUM
-def unique_sum(n): 
-    def decorator(func):
-        
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            result = 0
-            if (n != 0):
-                arrValues =set(args[0])
-                
-                for number in arrValues:
-                    result += number
-                return result
-            else:
-                return func(*args, **kwargs)
-        return wrapper
-    return decorator
+
+def remove_duplicates(func):
+    @wraps(func)
+    def wrapper(*args):
+            wrapper.original = func
+            arrValues = set(args[0])
+            return func(arrValues)
+    return wrapper
+
         
 arr = [ 1, 2, 3, 4, 5, 2, 3, 4 ]
-remove_duplicates = unique_sum(1)(sum)
-print(remove_duplicates(arr)) 
-#MODES: 0 - NORMAL SUM / !0 - UNIQUE SUM
+print(sum(arr))
+sum = remove_duplicates(sum)
+print(sum(arr))
+sum = sum.original
+print(sum(arr))
